@@ -1,6 +1,7 @@
 // Author : Shin
 
 import java.lang.Boolean;
+import java.lang.System;
 import java.util.Scanner;
 
 class UF
@@ -30,10 +31,28 @@ class UF
 
 class RunApp
 {
-    UF component = new UF();
-
     public static void main(String arg[])
     {
-        Scanner readIn = new Scanner()
+        Scanner readIn = new Scanner();
+
+        //Input no of components
+        int n = readIn.nextInt();
+        UF test = new UF(n);
+
+        //Input no of query
+        int query = readIn.nextInt();
+
+        //Work on Query
+        for (int i = 0; i < query; ++i )
+        {
+            char ops = readIn.next().charAt(0);
+            int p = readIn.nextInt();
+            int q = readIn.nextInt();
+
+            if (ops == 'U')
+                test.union(p, q);
+            else if (ops = 'C')
+                System.out.println(test.connected(p, q));
+        }
     }
 }
