@@ -15,17 +15,20 @@ class UF
             id[i] = i;
     }
 
+    int root(int i)
+    {
+        while (id[i] != i)
+            i = id[i];
+        return i;
+    }
     void union(int p, int q)
     {
-        int idP = id[p], idQ = id[q];
-        for(int i = 0; i < id.length; ++i )
-            if(id[i] == idQ)
-                id[i] = idP;
+        id[root(p)] = root(q);
     }
 
     Boolean connected(int p, int q)
     {
-        return id[p] == id[q];
+        return root(p) == root(q);
     }
 }
 
