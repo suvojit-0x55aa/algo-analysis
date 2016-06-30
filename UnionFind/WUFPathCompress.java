@@ -1,7 +1,6 @@
 // Author : Shin
 
-import java.lang.Boolean;
-import java.lang.System;
+import java.lang.*
 import java.util.Scanner;
 
 class UF
@@ -57,6 +56,7 @@ class RunApp
     public static void main(String arg[])
     {
         Scanner readIn = new Scanner(System.in);
+        StopWatch timer = new StopWatch();
 
         //Input no of components
         int n = readIn.nextInt();
