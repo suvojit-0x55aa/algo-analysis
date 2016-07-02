@@ -1,56 +1,70 @@
 // Author : Shin
 
 import java.lang.*;
+import java.lang.Integer;
+import java.lang.System;
 import java.util.*;
+import java.util.NoSuchElementException;
 
 class Stack implements Iterable<Integer>
 {
-    private Integer elements[]  = new Integer[1];
-    private int n = 0;
+    private class Node
+    {
+        Integer data;
+        Node next;
+
+        Node(Integer x)
+        {
+            data = x;
+            next = null;
+        }
+    }
+
+    Node top = null;
 
     boolean is_empty()
     {
-        return n == 0;
-    }
-
-    private void resize(int size)
-    {
-        Integer temp[] = new Integer[size];
-        for (int i = 0 ;i < elements.length; ++i )
-            temp[i] = elements[i];
-        elements = temp;
+        return top == null;
     }
 
     void push(Integer x)
     {
-        if (n == elements.length)
-            resize(2 * elements.length);
-        elements[n++] = x;
+        Node temp = new Node(x);
+        temp.next = top;
+        top = temp;
     }
 
     Integer pop()
     {
-        Integer temp = elements[--n];
-        if(n > 0 && n < 2 * elements.length / 6)
-            resize(elements.length/2);
-        return  temp;
+        if (!is_empty())
+        {
+            Integer temp = top.data;
+            top = top.next;
+            return temp;
+        }
+        else
+            throw new NoSuchElementException();
     }
 
     public Iterator<Integer> iterator()
     {
         Iterator<Integer> it = new Iterator<Integer>() {
-            private int count = 0;
+            private Node ptr = top;
 
             @Override
             public boolean hasNext() {
-                return count < n;
+                return ptr != null;
             }
 
             @Override
             public Integer next()
             {
-                if( count < n )
-                    return elements[count++];
+                if( ptr != null )
+                {
+                    Integer temp = ptr.data;
+                    ptr = ptr.next;
+                    return temp;
+                }
                 else
                     throw new NoSuchElementException();
             }
