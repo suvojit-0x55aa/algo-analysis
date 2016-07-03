@@ -29,18 +29,13 @@ class SelectionSort
     {
         for (int i = 1; i < arr.length; ++i)
         {
-            Integer key = arr[i];
-            int j;
-            for (j = i; j > 0; --j)
+            for (int j = i; j > 0; --j)
             {
                 if( less (arr[j], arr[j - 1]))
                     swap(arr, j, j - 1);
                 else
                     break;
             }
-            for (Integer x : arr)
-                System.out.print(x + " ");
-            System.out.print("\n");
         }
     }
 }
