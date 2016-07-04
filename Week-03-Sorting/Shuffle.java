@@ -6,7 +6,7 @@ import java.lang.UnsupportedOperationException;
 import java.util.Random;
 import java.util.Scanner;
 
-class ShellSort
+class Shuffle
 {
     static boolean less(Integer x, Integer y)
     {
@@ -29,7 +29,7 @@ class ShellSort
     {
         int h = 1, N = arr.length;
         while( h < N/3 )
-              h = 3 * h + 1;    //create seq 1,4,13,40,...
+            h = 3 * h + 1;    //create seq 1,4,13,40,...
         while( h > 0 )
         {
             for( int i = h; i < N; ++i )
@@ -68,7 +68,7 @@ class RunApp
         System.out.print("\n");
 
         //Sort array
-        ShellSort.sort(array);
+        SelectionSort.sort(array);
 
         //Display Sorted Array
         for (Integer x : array)

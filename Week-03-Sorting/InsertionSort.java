@@ -6,7 +6,7 @@ import java.lang.UnsupportedOperationException;
 import java.util.Random;
 import java.util.Scanner;
 
-class SelectionSort
+class InsertionSort
 {
     static boolean less(Integer x, Integer y)
     {
@@ -66,7 +66,7 @@ class RunApp
         System.out.print("\n");
 
         //Sort array
-        SelectionSort.sort(array);
+        InsertionSort.sort(array);
 
         //Display Sorted Array
         for (Integer x : array)
