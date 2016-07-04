@@ -6,7 +6,7 @@ import java.lang.UnsupportedOperationException;
 import java.util.Random;
 import java.util.Scanner;
 
-class Shuffle
+class KnuthShuffle
 {
     private static boolean less(Integer x, Integer y)
     {
@@ -43,26 +43,11 @@ class Shuffle
 
     static void shuffle(Integer arr[])
     {
-        int h = 1, N = arr.length;
-        while( h < N/3 )
-            h = 3 * h + 1;    //create seq 1,4,13,40,...
-
-        Integer ref[] = new Integer[N];
         Random rand = new Random();
-        for (int i = 0; i < N; ++i)
-            ref[i] = rand.nextInt((1000 - 10) + 1) + 10;
-
-        while( h > 0 )
+        for(int i = 0; i < arr.length; ++i)
         {
-            for( int i = h; i < N; ++i )
-            {
-                for( int j = i; j >= h && less(ref[j], ref[j - h]); j -= h )
-                {
-                    swap(arr, j, j - h);
-                    swap(ref, j, j - h);
-                }
-            }
-            h = h/3;
+            int r = rand.nextInt(i + 1);
+            swap(arr, i, r);
         }
     }
 }
@@ -86,7 +71,7 @@ class RunApp
         Random rand = new Random();
         for (int i = 0; i < array.length; ++i)
             array[i] = rand.nextInt((max - min) + 1) + min;
-        Shuffle.sort(array);
+        KnuthShuffle.sort(array);
 
         //Display Sorted Array
         for (Integer x : array)
@@ -94,7 +79,7 @@ class RunApp
         System.out.print("\n");
 
         //Shuffle array
-        Shuffle.shuffle(array);
+        KnuthShuffle.shuffle(array);
 
         //Display Shuffled Array
         for (Integer x : array)
