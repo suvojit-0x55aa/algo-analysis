@@ -6,7 +6,7 @@ import java.lang.UnsupportedOperationException;
 import java.util.Random;
 import java.util.Scanner;
 
-class SelectionSort
+class MergeSort
 {
     static boolean less(Integer x, Integer y)
     {
@@ -25,18 +25,38 @@ class SelectionSort
         a[j] = temp;
     }
 
+    private static void merge(Integer arr[], Integer aux[], int low, int mid, int high)
+    {
+        for (int i = low; i <= high; ++i)
+            aux[i] = arr[i];
+
+        int i = low, j = mid + 1, k = low;
+        while( i <= mid && j <= high )
+        {
+            if (less(arr[i], arr[j]))
+                arr[k++] = aux[i++];
+            else
+                arr[k++] = aux[j++];
+        }
+
+        while (i <= mid ) { arr[k++] = aux[i++]; }
+        while (j <= high) { arr[k++] = aux[j++]; }
+    }
+
+    private static void sort(Integer arr[], Integer aux[], int low, int high)
+    {
+        if( low >= high ) return;
+
+        int mid = low + (high - low) / 2;
+        sort(arr, aux, low, mid);
+        sort(arr, aux, mid+1, high);
+        merge(arr, aux, low, mid, high);
+    }
+
     static void sort(Integer arr[])
     {
-        for (int i = 0; i < arr.length; ++i)
-        {
-            Integer min = i;
-            for (int j = i+1; j < arr.length; ++j)
-            {
-                if( less (arr[j], arr[min]))
-                    min = j;
-            }
-            swap(arr ,min, i);
-        }
+        Integer aux[] = new Integer[arr.length];
+        sort(arr, aux, 0, arr.length - 1);
     }
 }
 
@@ -66,7 +86,7 @@ class RunApp
         System.out.print("\n");
 
         //Sort array
-        SelectionSort.sort(array);
+        MergeSort.sort(array);
 
         //Display Sorted Array
         for (Integer x : array)
