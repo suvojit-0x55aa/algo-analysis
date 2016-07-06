@@ -24,23 +24,7 @@ class KnuthShuffle
         a[i] = a[j];
         a[j] = temp;
     }
-
-    static void sort(Integer arr[])
-    {
-        int h = 1, N = arr.length;
-        while( h < N/3 )
-            h = 3 * h + 1;    //create seq 1,4,13,40,...
-        while( h > 0 )
-        {
-            for( int i = h; i < N; ++i )
-            {
-                for( int j = i; j >= h && less(arr[j], arr[j - h]); j -= h )
-                    swap(arr, j, j - h);
-            }
-            h = h/3;
-        }
-    }
-
+    
     static void shuffle(Integer arr[])
     {
         Random rand = new Random();
