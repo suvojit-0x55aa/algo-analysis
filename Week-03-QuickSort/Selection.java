@@ -79,7 +79,7 @@ class Selection
         {
             int j = lomuto_partition(arr, low, high);
             if( j < k )        low  = j + 1;
-            else  if ( j > k ) high = j + 1;
+            else  if ( j > k ) high = j - 1;
             else return arr[k];
         }
         return arr[k];
