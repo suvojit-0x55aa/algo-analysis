@@ -17,6 +17,12 @@ class Heap implements Iterable<Integer>
     private Integer key[]  = new Integer[1];
     private int n = 0;
 
+    Heap(Integer a[])
+    {
+        key = a;
+        n = a.length;
+    }
+
     boolean is_empty()
     {
         return n == 0;
