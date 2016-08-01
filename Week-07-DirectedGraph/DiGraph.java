@@ -70,14 +70,14 @@ class Bags<Item> implements Iterable<Item>
 }
 
 
-class Graphs
+class DiGraphs
 {
     private final int V;
     private int E;
 
     Bags<Integer> adj[];
 
-    Graphs(int n)
+    DiGraphs(int n)
     {
         this.V = n;
         this.E = 0;
@@ -86,7 +86,7 @@ class Graphs
             adj[i] = new Bags<Integer>();
     }
 
-    Graphs(Graphs G)
+    DiGraphs(DiGraphs G)
     {
         this(G.V());
         this.E = G.E();
@@ -154,7 +154,7 @@ class RunApp
         //Take Input
         int vert = readIn.nextInt();
         int edge = readIn.nextInt();
-        Graphs G = new Graphs(vert);
+        DiGraphs G = new Graphs(vert);
         for (int i = 0; i < edge; ++i)
         {
             int v = readIn.nextInt();
