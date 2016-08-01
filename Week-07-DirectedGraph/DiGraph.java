@@ -130,6 +130,17 @@ class DiGraphs
         return adj[v].size();
     }
 
+    public DiGraphs reverse()
+    {
+        DiGraphs reverse = new DiGraphs(this.V);
+
+        for (int v = 0; v < this.V; ++v)
+            for (int w : this.adj(v))
+                reverse.add_edge(w, v);
+
+        return reverse;
+    }
+
     public String toString()
     {
         StringBuilder s = new StringBuilder();
