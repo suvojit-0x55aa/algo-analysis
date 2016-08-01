@@ -1,11 +1,7 @@
 //Author : Shin
 
 import java.lang.*;
-import java.lang.Integer;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 class Bags<Item> implements Iterable<Item>
 {
@@ -145,6 +141,58 @@ class DiGraphs
     }
 }
 
+
+class DirectedDFSPaths
+{
+    private boolean marked[];
+    private int edgeTo[];
+    private final int s;
+    private final int V;
+
+    DirectedDFSPaths(DiGraphs G, int s)
+    {
+        this.V = G.V();
+        valid_vertex(s);
+        this.s = s;
+        marked = new boolean[G.V()];
+        edgeTo = new int[G.V()];
+        dfs(G, s);
+    }
+
+    private void valid_vertex(int v)
+    {
+        if (v < 0 || v > (V-1))  throw new IndexOutOfBoundsException();
+    }
+
+    private void dfs(DiGraphs G, int v)
+    {
+        marked[v] = true;
+        for (int w : G.adj(v))
+            if (!marked[w])
+            {
+                dfs(G, w);
+                edgeTo[w] = v;
+            }
+    }
+
+    public boolean has_path_to(int v)
+    {
+        valid_vertex(v);
+        return marked[v];
+    }
+
+    public Iterable<Integer> path_to(int v)
+    {
+        valid_vertex(v);
+        if (!has_path_to(v))  return null;
+        Stack<Integer> path = new Stack<Integer>();
+        for (int x = v; x != s; x = edgeTo[x])
+            path.push(x);
+        path.push(s);
+        return path;
+    }
+}
+
 class RunApp
 {
     public static void main(String args[])
@@ -159,10 +207,25 @@ class RunApp
         {
             int v = readIn.nextInt();
             int w = readIn.nextInt();
-            G.add_edge(v,w);
+            G.add_edge(v, w);
         }
 
-        //Print the Graph
-        System.out.println(G);
+        //Take Path Query
+        int s = readIn.nextInt();
+        DirectedDFSPaths dfs = new DirectedDFSPaths(G, s);
+
+        //Print paths
+        for (int i = 0; i < G.V(); ++i)
+        {
+            if (dfs.has_path_to(i))
+            {
+                for (int x : dfs.path_to(i))
+                {
+                    if (x == s)  System.out.print(x);
+                    else         System.out.print( x + " - ");
+                }
+                System.out.println();
+            }
+        }
     }
 }
