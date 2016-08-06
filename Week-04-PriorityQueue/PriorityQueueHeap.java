@@ -14,13 +14,13 @@ import java.util.Scanner;
 
 class Heap implements Iterable<Integer>
 {
-    private Integer key[]  = new Integer[1];
-    private int n = 0;
+    private Integer key[];
+    private int n;
 
-    Heap(Integer a[])
+    Heap()
     {
-        key = a;
-        n = a.length;
+        key = new Integer[1];
+        n = 0;
     }
 
     boolean is_empty()
@@ -64,7 +64,7 @@ class Heap implements Iterable<Integer>
 
     private void sink (int k)
     {
-        while ( 2 * k + 1 < n  )
+        while ( 2 * k + 2 < n )
         {
             int j = 2 * k + 1;
             if ( j < n && more(key[j], key[j + 1]))  ++j;
@@ -84,8 +84,9 @@ class Heap implements Iterable<Integer>
 
     Integer remove ()
     {
-        Integer temp = key[--n];
-        swap(key, 0, n);
+        Integer temp = key[0];
+        swap(key, 0, --n);
+        sink(0);
         if ( n > 0 && n < key.length / 3 )
             resize(key.length / 2);
         return temp;
@@ -145,7 +146,7 @@ class RunApp
             temp = readIn.nextInt();
             pq.insert(temp);
             if (pq.size() > m)
-                pq.remove();
+                System.out.println(pq.remove());
         }
 
         //Print Max M Keys
