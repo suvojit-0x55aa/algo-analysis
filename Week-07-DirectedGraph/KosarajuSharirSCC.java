@@ -2,12 +2,7 @@
 
 import javax.naming.OperationNotSupportedException;
 import java.lang.*;
-import java.lang.IllegalArgumentException;
-import java.lang.Integer;
-import java.lang.Iterable;
 import java.util.*;
-import java.util.Deque;
-import java.util.LinkedList;
 
 class Bags<Item> implements Iterable<Item>
 {
