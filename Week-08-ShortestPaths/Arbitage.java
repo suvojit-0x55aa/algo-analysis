@@ -287,7 +287,6 @@ class BellmanFord
                     onQ[w] = true;
                 }
             }
-
             if (cost++ % G.V() == 0 )  find_neg_cycle();
             if (this.has_neg_cycle())  return;
         }
@@ -327,8 +326,8 @@ class Arbitage
 {
     private int n;
     private String names[];
-    WeightedDigraph G;
-    BellmanFord spt;
+    private WeightedDigraph G;
+    private BellmanFord spt;
 
     Arbitage(int n)
     {
