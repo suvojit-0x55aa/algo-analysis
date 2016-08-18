@@ -8,7 +8,7 @@ import java.util.Scanner;
 class TrieST<Value>
 {
     private static final int R = 256;
-    private Node root;
+    private Node root = new Node();
     private int n;
 
     private static class Node
